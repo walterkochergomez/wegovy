@@ -10,7 +10,7 @@ const errorMsg = document.getElementById('error-msg');
 const historialLista = document.getElementById('historial-lista');
 const capacidadInput = document.getElementById('capacidad-input');
 const btnSumarLapiz = document.getElementById('btn-sumar-lapiz');
-const btnBorrarTodo = document.getElementById('btn-borrar-todo'); // Nuevo botón
+const btnBorrarTodo = document.getElementById('btn-borrar-todo'); 
 
 // Función para cargar datos guardados en el navegador
 function cargarDatos() {
@@ -81,14 +81,17 @@ btnSumarLapiz.addEventListener('click', () => {
 
     if (confirm(`¿Agregar un lápiz de ${nuevaCapacidad} ml? Se sumará a tu remanente actual de ${remanente.toFixed(2)} ml.`)) {
         remanente += nuevaCapacidad; 
-        historial = []; // Vaciamos el historial de aplicaciones
+        
+        // ¡Se eliminó la línea que borraba el historial! 
+        // Ahora tus dosis anteriores seguirán apareciendo.
+        
         guardarDatos();
         actualizarUI();
         alert(`¡Listo! Ahora tienes un total de ${remanente.toFixed(2)} ml disponibles.`);
     }
 });
 
-// NUEVO: Evento para borrar todo desde cero
+// Evento para borrar todo desde cero
 btnBorrarTodo.addEventListener('click', () => {
     if (confirm('⚠️ PELIGRO: ¿Estás seguro de borrar TODOS los datos? El remanente volverá a 0 y el historial se perderá para siempre.')) {
         
