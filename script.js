@@ -69,22 +69,28 @@ btnAplicar.addEventListener('click', () => {
     actualizarUI();
 });
 
-// Evento para reiniciar un nuevo lápiz
+// Evento para reiniciar (agregar) un nuevo lápiz
 btnReiniciar.addEventListener('click', () => {
     const nuevaCapacidad = parseFloat(capacidadInput.value);
     
     if (isNaN(nuevaCapacidad) || nuevaCapacidad <= 0) {
-        alert('Ingresa una capacidad inicial válida para el nuevo lápiz.');
+        alert('Ingresa una capacidad válida para el nuevo lápiz.');
         return;
     }
 
-    // Confirmación de seguridad
-    if (confirm('¿Estás seguro de iniciar un nuevo lápiz? Esto borrará el remanente y el historial actual.')) {
-        remanente = nuevaCapacidad;
-        historial = []; // Vaciar historial
+    // Confirmación de seguridad actualizada
+    if (confirm(`¿Agregar un lápiz de ${nuevaCapacidad} ml? Se sumará a tu remanente actual de ${remanente.toFixed(2)} ml.`)) {
+        
+        // EL CAMBIO ESTÁ AQUÍ: Sumamos la nueva capacidad al remanente que ya existía
+        remanente += nuevaCapacidad; 
+        
+        // Vaciamos el historial de aplicaciones para empezar limpios con la nueva carga
+        historial = []; 
         
         guardarDatos();
         actualizarUI();
+        
+        alert(`¡Listo! Ahora tienes un total de ${remanente.toFixed(2)} ml disponibles.`);
     }
 });
 
